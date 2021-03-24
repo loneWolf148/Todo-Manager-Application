@@ -1,0 +1,26 @@
+<ng-template #todoTemplate>
+  <tr>
+    <td>
+      <input type="checkbox" [checked]="item.isCompleted" (change)="toggleCompletionStatus()">
+      <span class="lead" [ngStyle]="{'text-decoration': item.isCompleted ? 'line-through' : 'none'}"
+        [ngClass]="{'text-muted': item.isCompleted, 'text-danger': !item.isCompleted && isOverDue()}">
+        Mark as {{item.isCompleted ? "incomplete" : "complete"}}
+      </span>
+    </td>
+
+    <td class="lead" [ngStyle]="{'text-decoration': item.isCompleted ? 'line-through' : 'none'}"
+      [ngClass]="{'text-muted': item.isCompleted, 'text-danger': !item.isCompleted && isOverDue()}">
+      {{item.description}}
+    </td>
+
+    <td class="lead" [ngStyle]="{'text-decoration': item.isCompleted ? 'line-through' : 'none'}"
+      [ngClass]="{'text-muted': item.isCompleted, 'text-danger': !item.isCompleted && isOverDue()}">
+      {{item.deadline | date:'mediumDate'}}
+    </td>
+
+    <td>
+      <button class="btn btn-warning" [disabled]="item.isCompleted" (click)="editTodo()">Edit</button>
+      <button class="btn btn-danger" [disabled]="item.isCompleted" (click)="deleteTodo()">Delete</button>
+    </td>
+  </tr>
+</ng-template>

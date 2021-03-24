@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4 text-center text-primary">TODO Manager Application</h1>
+    <p class="lead text-center text-info font-weight-bold">A Simple Web Application to maintain TODO</p>
+
+    <hr>
+
+    <div class="text-center">
+      <a class="btn btn-lg btn-primary" [routerLink]="['/add-todo']">Add TODO</a>
+    </div>
+
+    <br>
+
+    <form class="form" #filterForm="ngForm">
+      <div class="form-group">
+        <label for="terminal" class="font-weight-bolder text-capitalize">Terminal Date</label>
+        <input type="date" class="form-control" id="terminal" name="terminal" [(ngModel)]="terminalDate">
+      </div>
+
+      <input type="submit" class="btn btn-primary" [disabled]="filterForm.pristine" (click)="applyTerminalFilter()">
+      <input type="reset" class="btn btn-danger" [disabled]="filterForm.pristine" (click)="applyTerminalFilter(true)">
+    </form>
+
+    <hr>
+    <table class="table" *ngIf="items.length > 0; else noItem">
+      <thead>
+        <th class="text-success">TODO Completion Status</th>
+        <th class="text-success">TODO Description</th>
+        <th class="text-success">TODO Deadline</th>
+        <th class="text-success">TODO Operations</th>
+      </thead>
+
+      <tbody>
+        <app-todo *ngFor="let item of items" [todo]="item" (delete)="deleteTodo($event)"></app-todo>
+      </tbody>
+    </table>
+
+    <ng-template #noItem>
+      <p class="lead text-center font-weight-bold text-primary">No TODO Present in Repository, Please Add Some</p>
+    </ng-template>
+
+  </div>
+</div>

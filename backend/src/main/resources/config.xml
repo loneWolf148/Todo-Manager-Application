@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <developer location="Kolkata" age="22">Subham Das</developer>
+    <terminal-date format="yyyy-MM-dd">2021-03-14</terminal-date>
+</configuration>

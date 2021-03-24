@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="text-center text-primary">Add New TODO</h1>
+    <form #addForm="ngForm">
+
+      <div class="form-group">
+        <label for="description" class="font-weight-bolder">TODO Description</label>
+        <input type="text" class="form-control" id="description" required minlength="3" name="description"
+          [(ngModel)]="todo.description" #description="ngModel">
+      </div>
+
+      <div *ngIf="description.touched && description.invalid">
+        <div class="alert alert-danger" *ngIf="description.errors.required">
+          TODO Must Have A Description
+        </div>
+        <div class="alert alert-danger" *ngIf="description.errors.minlength">
+          TODO Description Must be At Least {{description.errors.minlength.requiredLength}} Characters Long
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="deadline" class="font-weight-bolder">TODO Deadline</label>
+        <input type="date" class="form-control" id="deadline" required name="deadline" [(ngModel)]="todo.deadline"
+          #deadline="ngModel">
+      </div>
+
+      <div *ngIf="deadline.touched">
+        <div class="alert alert-danger" *ngIf="deadline.invalid && deadline.errors.required">
+          TODO Must Have A Deadline
+        </div>
+        <div class="alert alert-danger" *ngIf="invalidDeadline()">
+          TODO Deadline Cannot Be In Past
+        </div>
+      </div>
+
+      <input type="submit" value="Add TODO" class="btn btn-primary"
+        [disabled]="addForm.pristine || addForm.invalid || invalidDeadline()" (click)="addTodo()">
+      &nbsp; &nbsp;
+
+      <a [routerLink]="['/home']" class="btn btn-danger">Cancel</a>
+    </form>
+  </div>
+</div>
